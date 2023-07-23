@@ -27,14 +27,14 @@ jobs:
                 with:
                     registry: ghcr.io
                     username: USERNAME
-                    password: ${{ secrets.GHCR_TOKEN }}
+                    password: ${{ secrets.GITHUB_TOKEN }}
             -
                 name: Docker keycloak  meta
                 id: keycloak
                 uses: docker/metadata-action@v4
                 with:
                     images: |
-                        ghcr.io/daniel-marynicz/keycloak
+                        ghcr.io/nwrkbiz/keycloak
                     labels: |
                         org.opencontainers.image.description=Open Source Identity and Access Management
                         org.opencontainers.image.title=Keycloak
@@ -42,7 +42,7 @@ jobs:
             -   name: Print the  build options without build
                 env:
                     VERSION: "${{ inputs.version }}"
-                    TAG: "ghcr.io/daniel-marynicz/keycloak:${{ inputs.version }}"
+                    TAG: "ghcr.io/nwrkbiz/keycloak:${{ inputs.version }}"
                 run: |
                     cat "${{ steps.keycloak.outputs.bake-file }}"
                     docker buildx bake  -f docker-bake.hcl -f "${{ steps.keycloak.outputs.bake-file }}" --print
@@ -51,7 +51,7 @@ jobs:
                 if: ${{ github.event_name != 'pull_request' }}
                 env:
                     VERSION: "${{ inputs.version }}"
-                    TAG: "ghcr.io/daniel-marynicz/keycloak:${{ inputs.version }}"
+                    TAG: "ghcr.io/nwrkbiz/keycloak:${{ inputs.version }}"
                 with:
                     files: |
                         ./docker-bake.hcl
