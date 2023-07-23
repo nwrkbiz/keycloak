@@ -14,7 +14,8 @@ jobs:
     build-and-push:
         runs-on: ubuntu-latest
         timeout-minutes: 16
-        permissions: read-all|write-all
+        permissions:
+            deployments: read|write
         steps:
             - uses: actions/checkout@v3
             - name: Set up QEMU
