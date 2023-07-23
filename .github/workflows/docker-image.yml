@@ -10,6 +10,7 @@ on:
                 description: 'Keycloak version'
                 required: true
                 type: string
+permissions: read-all|write-all
 jobs:
     build-and-push:
         runs-on: ubuntu-latest
